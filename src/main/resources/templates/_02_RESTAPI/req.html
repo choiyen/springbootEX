@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>================ GET 요청 ===============</h1>
+<div style="display: flex">
+    <form action="/get/res1" method="get" style="margin-right: 20px;">
+        <h3>Get 전송 (required = true)</h3>
+        이름 : <input type="text" name="name">
+        나이 : <input type="number" name="age">
+        <br>
+        <button>Get 전송</button>
+    </form>
+    <form action="/get/res2" method="get" style="margin-right: 20px;">
+        <h3>Get 전송 (required = false)</h3>
+        <!--        이름 : <input type="text" name="name">-->
+        <!--        나이 : <input type="number" name="age">-->
+        <br>
+        <button>Get 전송</button>
+    </form>
+</div>
+
+<div style="margin-right: 20px;">
+    <h3>Get 전송 - ~/{param1}/{param2}</h3>
+    <a href="/get/res3/홍길동/20">
+        /get/res3/홍길동/20
+    </a>
+    <br>
+    <a href="/get/res3/홍길동">
+        /get/res3/홍길동 (error, 경로 변수 값 필수)
+    </a>
+</div>
+<div style="margin-right: 20px;">
+    <h3>Get 전송 - ~/{name}, ~{name}/{age}</h3>
+    <a href="/get/res4/홍길동/20">
+        /get/res4/홍길동/20
+    </a>
+    <br>
+    <a href="/get/res4/홍길동">
+        /get/res4/홍길동
+    </a>
+</div>
+
+<h1>================ POST 요청 ===============</h1>
+<div style="display: flex">
+    <form action="/post/res1" method="post" style="margin-right: 20px;">
+        <h3>Post 전송 (required = true)</h3>
+        이름 : <input type="text" name="name" placeholder="이름">
+        나이 : <input type="number" name="age" placeholder="나이">
+        <br>
+        <button>Post 전송</button>
+    </form>
+    <form action="/post/res2" method="post" style="margin-right: 20px;">
+        <h3>Post 전송 (required = false)</h3>
+        이름 : <input type="text" name="name">
+        나이 : <input type="number" name="age">
+        <br>
+        <button>Post 전송</button>
+    </form>
+    <form action="/post/res3" method="post" style="margin-right: 20px;">
+        <h3>Post 전송 (ResponseBody)</h3>
+        이름 : <input type="text" name="name">
+        나이 : <input type="number" name="age">
+        <br>
+        <button>Post 전송</button>
+    </form>
+</div>
+
+<hr>
+
+<h1>================ DTO 이용 요청 ===============</h1>
+<div style="display: flex">
+    <form action="/dto/res1" method="get" style="margin-right: 20px;">
+        <h3>Get - DTO</h3>
+        이름 : <input type="text" name="name" placeholder="이름">
+        나이 : <input type="number" name="age" placeholder="나이">
+        <br>
+        <button>Get 전송</button>
+    </form>
+    <form action="/dto/res2" method="post" style="margin-right: 20px;">
+        <h3>Post - DTO</h3>
+        이름 : <input type="text" name="name">
+        나이 : <input type="number" name="age">
+        <br>
+        <button>Post 전송 (RequestBody X)</button>
+    </form>
+    <form action="/dto/res3" method="post" style="margin-right: 20px;">
+        <h3>Post - DTO</h3>
+        이름 : <input type="text" name="name">
+        나이 : <input type="number" name="age">
+        <br>
+        <button>Post 전송 (RequestBody O)</button>
+    </form>
+</div>
+<hr>
+
+<h1>================ VO 이용 요청 ===============</h1>
+<div style="display: flex">
+    <form action="/vo/res1" method="get" style="margin-right: 20px;">
+        <h3>Get - VO</h3>
+        이름 : <input type="text" name="name" placeholder="이름">
+        나이 : <input type="number" name="age" placeholder="나이">
+        <br>
+        <button>Get 전송</button>
+    </form>
+    <form action="/vo/res2" method="post" style="margin-right: 20px;">
+        <h3>Post - VO</h3>
+        이름 : <input type="text" name="name">
+        나이 : <input type="number" name="age">
+        <br>
+        <button>Post 전송 (RequestBody X)</button>
+    </form>
+    <form action="/vo/res3" method="post" style="margin-right: 20px;">
+        <h3>Post - VO</h3>
+        이름 : <input type="text" name="name">
+        나이 : <input type="number" name="age">
+        <br>
+        <button>Post 전송 (RequestBody O)</button>
+    </form>
+</div>
+
+<hr>
+<h1>================ DTO 이용 with. axios ===============</h1>
+<div style="display: flex">
+    <form style="margin-right: 20px;" id="form_dto1">
+        이름 : <input type="text" name="name" placeholder="이름">
+        나이 : <input type="number" name="age" placeholder="나이">
+        <br>
+        <button type="button" onclick="dtoRes1();">Get (일반)</button>
+        <button type="button" onclick="dtoRes2();">Get (DTO)</button>
+    </form>
+    <form style="margin-right: 20px;" id="form_dto2">
+        이름 : <input type="text" name="name">
+        나이 : <input type="number" name="age">
+        <br>
+        <button type="button" onclick="dtoRes3();">Post (일반)</button>
+        <button type="button" onclick="dtoRes4();">Post (DTO) - (RequestBody X)</button>
+        <button type="button" onclick="dtoRes5();">Post (DTO) - (RequestBody O)</button>
+    </form>
+</div>
+<hr>
+<h1>================ VO 이용 with. axios ===============</h1>
+<div style="display: flex">
+    <form style="margin-right: 20px;" id="form_dto3">
+        이름 : <input type="text" name="name" placeholder="이름">
+        나이 : <input type="number" name="age" placeholder="나이">
+        <br>
+        <button type="button" onclick="voRes1();">Get (일반)</button>
+        <button type="button" onclick="voRes2();">Get (VO)</button>
+    </form>
+    <form style="margin-right: 20px;" id="form_dto4">
+        이름 : <input type="text" name="name">
+        나이 : <input type="number" name="age">
+        <br>
+        <button type="button" onclick="voRes3();">Post (일반)</button>
+        <button type="button" onclick="voRes4();">Post (VO) - (RequestBody X)</button>
+        <button type="button" onclick="voRes5();">Post (VO) - (RequestBody O)</button>
+    </form>
+</div>
+<script>
+    function dtoRes1()
+    {
+        const form = document.getElementById("form_dto1");
+         axios.get(`/axios/res?name=${form.name.value}&age=${form.age.value}`)
+        .then((res) => {
+            console.log('dtoRes1 : ', res.data);
+        });
+    }
+    function dtoRes2() {
+        const form = document.getElementById("form_dto1");
+        axios.get(`/axios/res2?name=${form.name.value}&age=${form.age.value}`)
+        .then((res) => {
+            console.log('dtoRes2 : ', res.data);
+        });
+    }
+    function dtoRes3() {
+        const form = document.getElementById("form_dto2");
+        axios.post(`/axios/res3`, {name:form.name.value, age:form.age.value})
+        .then((res) => {
+            console.log('dtoRes3 : ', res.data);
+        });
+    }
+    function dtoRes4() {
+        const form = document.getElementById("form_dto2");
+        axios.post(`/axios/res4`, {name:form.name.value, age:form.age.value})
+        .then((res) => {
+            console.log('dtoRes4 : ', res.data);
+        });
+    }
+    function dtoRes5() {
+        const form = document.getElementById("form_dto2");
+        axios.post(`/axios/res5`, {name:form.name.value, age:form.age.value})
+        .then((res) => {
+            console.log('dtoRes5 : ', res.data);
+        });
+    }
+    function voRes1()
+    {
+        const form = document.getElementById("form_dto3");
+        axios.get(`/axios/vo/res?name=${form.name.value}&age=${form.age.value}`)
+        .then((res) => {
+            console.log('dtoRes1 : ', res.data);
+        });
+    }
+    function voRes2() {
+        const form = document.getElementById("form_dto3");
+        axios.get(`/axios/vo/res2?name=${form.name.value}&age=${form.age.value}`)
+        .then((res) => {
+            console.log('voRes2 : ', res.data);
+        });
+    }
+    function voRes3() {
+        const form = document.getElementById("form_dto4");
+        axios.post(`/axios/vo/res3`, {name:form.name.value, age:form.age.value})
+        .then((res) => {
+            console.log('voRes3 : ', res.data);
+        });
+    }
+    function voRes4() {
+        const form = document.getElementById("form_dto4");
+        axios.post(`/axios/vo/res4`, {name:form.name.value, age:form.age.value})
+        .then((res) => {
+            console.log('voRes4 : ', res.data);
+        });
+    }
+    function voRes5() {
+        const form = document.getElementById("form_dto4");
+        axios.post(`/axios/vo/res5`, {name:form.name.value, age:form.age.value})
+        .then((res) => {
+            console.log('voRes5 : ', res.data);
+        });
+    }
+
+</script>
+</body>
+</html>

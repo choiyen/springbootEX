@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <!-- axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h2>회원정보</h2>
+<h3>회원이 되어 다양한 혜택을 경험해 보세요!</h3>
+<form style="margin-right: 20px" id = "form">
+    <fieldset>
+        아이디 : <input type="text" name="id" placeholder="아이디" />
+        <br />
+        비밀번호 : <input type="password" name="pw" placeholder="비밀번호" />
+        <br />
+        비밀번호 확인 :
+        <input type="password" name="pw2" placeholder="비밀번호 확인" />
+        <br />
+        이름 : <input type="text" name="name" placeholder="이름" />
+        <br />
+        전화번호 : <input type="number" name="name" placeholder="전화번호" />
+        <span>(-을 빼고 숫자만 입력해주세요)</span>
+        <br />
+        이메일 : <input type="email" name="name" placeholder="이메일" />
+        <br />
+        생년월일 : <input type="date" name="date" />
+        <br />
+        성별 : <input type="radio" name="gender" value="male" />남자
+        <input type="radio" name="gender" value="female" /> 여자
+        <br />
+        관심사 : <input type="checkbox" name="interest" value="travel" /> 여행
+        <input type="checkbox" name="interest" value="fashion" /> 패션
+        <input type="checkbox" name="interest" value="food" /> 음식
+        <br />
+        <button onclick="interesting3()">가입하기</button>
+        <button>가입취소</button>
+    </fieldset>
+</form>
+<br>
+<br>
+<br>
+<form style="margin-right: 20px" id = "form2">
+    <fieldset>
+    <legend>로그인</legend>
+    아이디 : <input type="text" name="id" placeholder="아이디" />
+    <br />
+    비밀번호 : <input type="password" name="pw" placeholder="비밀번호" />
+    <br />
+    <button onclick="interesting4()">로그인</button>
+    </fieldset>
+</form>
+<br>
+<br>
+<br>
+<form style="margin-right: 20px" id = "form3">
+    <fieldset>
+        <legend>회원탈퇴</legend>
+        아이디 : <input type="text" name="id" placeholder="아이디" />
+        <br />
+        비밀번호 : <input type="password" name="pw" placeholder="비밀번호" />
+        <br />
+        <button onclick="interesting5()">회원탈퇴</button>
+    </fieldset>
+</form>
+<br>
+<br>
+<br>
+<form style="margin-right: 20px" id = "form4">
+        <fieldset>
+            아이디 : <input type="text" name="id" placeholder="아이디" th:value="${id}"/>
+            <br />
+            비밀번호 : <input type="password" name="pw" placeholder="비밀번호" th:value="${pw}"/>
+            <br />
+            비밀번호 확인 :
+            <input type="password" name="pw2" placeholder="비밀번호 확인" />
+            <br />
+            이름 : <input type="text" name="name" placeholder="이름" th:value="${name}"/>
+            <br />
+            전화번호 : <input type="number" name="name" placeholder="전화번호" th:value="${phone}"/>
+            <span>(-을 빼고 숫자만 입력해주세요)</span>
+            <br />
+            이메일 : <input type="email" name="name" placeholder="이메일" th:value="${email}"/>
+            <br />
+            생년월일 : <input type="date" name="date"/>
+            <br />
+            성별 : <input type="radio" name="gender" value="male"/>남자
+            <input type="radio" name="gender" value="female" /> 여자
+            <br />
+            관심사 : <input type="checkbox" name="interest" value="travel" /> 여행
+            <input type="checkbox" name="interest" value="fashion" /> 패션
+            <input type="checkbox" name="interest" value="food" /> 음식
+            <br />
+            <button onclick="interesting5()">정보수정</button>ㄹㅊㅊ
+    </fieldset>
+</form>
+<script>
+    function interesting3() {
+        let form = document.getElementById('form');
+        let id = form.id.value;
+        let pw = form.pw.value;
+        let pw2 = form.pw2.value;
+        let name = form.name.value;
+        let phone = form.phone.value;
+        let email = form.email.value;
+        let date = form.date.value;
+        let gender = form.gender.value;
+        const hobbies = [];
+        form.interest.forEach((element) => {
+            if (element.checked) {
+                hobbies.push(element.value);
+            }
+        });
+        if (pw !== pw2) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+        if (id === '' || pw === '' || name === '' || phone === '' || email === '' || date === ''|| email === ''|| date === ''|| gender === ''|| interest === '' || interest == '')
+        {
+            alert('모든 항목을 입력해주세요.');
+            return;
+        }
+
+        axios.post('/interestingC', {
+            id: id,
+            pw: pw,
+            name: name,
+            phone: phone,
+            email: email,
+            date: date,
+            gender : gender,
+            hobbies: hobbies,
+        });
+    }
+      function interesting4()
+      {
+        let form = document.getElementById('form2');
+        let id = form.id.value;
+        let pw = form.pw.value;
+        if (id === '' || pw === '')
+        {
+            alert('모든 항목을 입력해주세요.');
+            return;
+        }
+
+        axios.post('/interestingR', {
+            id: id,
+            pw: pw,
+        });
+    }
+      function interesting5()
+      {
+        let form = document.getElementById('form3');
+        let id = form.id.value;
+        let pw = form.pw.value;
+        if (id === '' || pw === '')
+        {
+            alert('모든 항목을 입력해주세요.');
+            return;
+        }
+
+        axios.post('/interestingD', {
+            id: id,
+            pw: pw,
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmln:th="http:/thymeleaf.org" xmlns:xmln="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--ver1. Thymeleaf 템플릿 테스트 -->
+<b th:text="안녕하세요. + ${msg}"></b>
+
+<!--Ver2. Thymeleaf 표현식과 문법 -->
+<h3> th:text 예시</h3>
+<p>텍스트 표현(참고) 테그 안에 텍스트 적더라도 나오지 않음</p>
+<b th:text="안녕하세요. + ${hello}"></b>
+
+<h3> th:utext 예시</h3>
+<p>Html 테그를 반영한 텍스트</p>
+<b th:utext= "안녕하세요. + ${uText}"></b>
+
+<h3> th:value 예시</h3>
+<p>html 요소의 value 속성 값을 지정할 때 사용</p>
+<input type="text" th:value= "${value}">
+
+<h3> th:with 예시</h3>
+<p>변수값을 지정해서 사용할 떄 사용</p>
+<br> 서버에서 전달 받은 withValue 속성의 값을 temp 라는 변수를 저장해서 사용 중인 예시
+<p th:with="temp=${withValue}" th:text="${temp}"> </p>
+
+<h3> th:href 예시</h3>
+<p>경로 위에 {}에 필요한 파라미터 값을 model 을 통해 주입받은 변수나 자체 변수를 넣을 수 있다.</p>
+<br> 서버에서 전달 받은 withValue 속성의 값을 temp 라는 변수를 저장해서 사용 중인 예시
+<a th:href="@{/${id}(id=${link})}">Link1</a>
+<a th:href="@{/hi}">link2</a>
+<a th:href="@{http://www.google.com}">Google</a>
+
+<h3>th:src 예시</h3>
+<img th:src="${imgSrc}" width="200px">
+
+<h3>th:switch 예시</h3>
+<div th:switch="${userRole}">
+<!-- * : default 의미   -->
+    <p th:case="admin">Hello, Admin</p>
+    <p th:case="user">Hello, user</p>
+    <p th:case="*">Hello, UnKnown</p>
+</div>
+
+
+<h3>th:if, th:unless 예시</h3>
+<!--unless 는 if 없이도 사용 가능, 이때는 조건이 false 일 떄 실행됨-->
+<div>
+    <p th:if = "${isAdmin}">Wellcome, Admin</p>
+    <p th:unless = "${isAdmin}">Wellcome, User</p>
+</div>
+
+
+<h3>th:each 예시</h3>
+<ul>
+    <li th:each="name:${names}" th:text="${name}"></li>
+</ul>
+
+<h3>클래스 예시</h3>
+<div th:text="${classHello.getage}"></div>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>th:if, th:unless 예시</h3>
+<!--unless 는 if 없이도 사용 가능, 이때는 조건이 false 일 떄 실행됨-->
+<div>
+  <p th:if = "${age} < 20" style="color:blue">10세는 미성년자입니다.</p>
+  <p th:unless = "${age} < 20" style="color:green">20세는 성인입니다.</p>
+</div>
+</body>
+</html>
+
+
